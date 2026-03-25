@@ -1,0 +1,109 @@
+---
+title: "Primera Prueba de Evaluación Contínua"
+author: "Dra. Marta Barea Sepúlveda"
+date: "7 de abril de 2026"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    highlight: tango
+    latex_engine: pdflatex
+    keep_tex: false
+    includes:
+      in_header: preamble.tex
+  word_document:
+    toc: true
+    toc_depth: '3'
+classoption: twoside
+geometry: top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm
+fontsize: 11pt
+lang: es
+---
+
+\clearpage
+\pagestyle{plain}
+\setcounter{page}{1}
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, tidy = FALSE) 
+```
+
+# Ejercicio 1
+
+## Enunciado
+
+En un ensayo clínico de un nuevo fármaco oncológico, se estudia el número de efectos adversos leves que presenta un paciente durante el primer ciclo de tratamiento. Se propone el siguiente modelo:
+
+\[
+\bar{p}(x) = K(x + 3), \quad x = 0,1,2,3,4
+\]
+
+\begin{enumerate}
+  \item Determinar el valor de \(K\) para que \(p(x)\) sea una función de probabilidad.
+  
+  \item Calcular la esperanza y la varianza del número de efectos adversos por paciente.
+  
+  \item Calcular:
+  \begin{enumerate}
+    \item La probabilidad de que un paciente presente exactamente 1 efecto adverso.
+    \item La probabilidad de que presente al menos 2 efectos adversos.
+    \item La probabilidad de que presente como máximo 3 efectos adversos.
+  \end{enumerate}
+\end{enumerate}
+
+## Resolución
+
+
+# Ejercicio 2
+
+## Enunciado
+
+En un reciente estudio sobre la incidencia de ceguera en personas con diabetes insulinodependiente (DID), se reportó una tasa anual de ceguera del \(0.67\%\) entre hombres de 30 a 39 años con DID, y del \(0.74\%\) entre mujeres de 30 a 39 años con DID.
+
+\begin{enumerate}
+  \item[a)] Si se selecciona un grupo de 200 hombres DID de 30 a 39 años, ¿cuál es la probabilidad de que exactamente 2 se vuelvan ciegos en un año?
+
+  \item[b)] ¿Cuál es la probabilidad de que una mujer DID de 30 años se vuelva ciega en los próximos 10 años? ¿Y cuál es la probabilidad en el caso de un hombre?
+
+  \item[c)] Supón que se tienen 10 hombres DID de 30 a 39 años y 10 mujeres DID de 30 a 39 años. ¿Cuál es la probabilidad de que exactamente 3 personas con DID se vuelvan ciegas en 10 años?
+
+  \item[d)] ¿Cuál es la probabilidad de que al menos 2 de las 20 personas se vuelvan ciegas en 10 años?
+\end{enumerate}
+
+## Resolución
+
+
+# Ejercicio 3
+
+## Enunciado
+
+El peso de los individuos de una población sigue una distribución normal distinta según el sexo:
+
+- Hombres: \(P_h \sim N(78, 8)\,\text{kg}\)
+- Mujeres: \(P_m \sim N(65, 7)\,\text{kg}\)
+
+En la población se sabe que el \(40\%\) son hombres y que el \(10\%\) de los individuos realiza deporte intenso.
+
+\begin{enumerate}
+  \item[a)] Si se selecciona un hombre al azar, ¿cuál es la probabilidad de que pese más de \(86\,\text{kg}\)?
+  
+  \item[b)] Si se selecciona un individuo al azar, ¿cuál es la probabilidad de que pese más de \(70\,\text{kg}\)?
+  
+  \item[c)] Indica por qué es incorrecta la expresión siguiente y calcula el valor correcto:
+  \[
+  P(\text{Hombre} \mid \text{peso} > 70) = P(\text{peso} > 70 \mid \text{Hombre})
+  \]
+  
+  Se selecciona un individuo y se observa que pesa más de \(70\,\text{kg}\).
+  
+  \item[d)] Indica si la afirmación siguiente es correcta y calcula el valor numérico:
+  
+  ¿Cuál es el percentil 95 del peso en hombres?
+  
+  Un estudiante responde: “Es el valor que deja el \(95\%\) de los datos por encima”.
+  
+  \item[e)] Una plataforma elevadora soporta \(240\,\text{kg}\) y suben 3 personas. ¿Cuál es la probabilidad de que la plataforma aguante?
+\end{enumerate}
+
+## Resolución
