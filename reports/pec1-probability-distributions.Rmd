@@ -15,6 +15,10 @@ output:
   word_document:
     toc: true
     toc_depth: '3'
+  html_document:
+    toc: true
+    toc_depth: '3'
+    df_print: paged
 classoption: twoside
 geometry: top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm
 fontsize: 11pt
@@ -56,7 +60,8 @@ En un ensayo clínico de un nuevo fármaco oncológico, se estudia el número de
 
 \begin{enumerate}
 
-\item Determinar el valor de \(K\) para que \(p(x)\) sea una función de probabilidad.
+\item \textbf{Determinar el valor de \(K\) para que \(p(x)\) sea una función de probabilidad.}
+\medskip
 
 Nos encontramos ante una función de probabilidad discreta, por lo que debemos asegurarnos de que la suma de las probabilidades para todos los valores posibles de \(x\) sea igual a 1. Dado que \(x\) puede tomar los valores \(0, 1, 2, 3\) y \(4\), tenemos:
 \[
@@ -80,7 +85,8 @@ K \cdot 25 = 1 \implies K = \frac{1}{25} = 0.04
 
 Por tanto, para que \(p(x)\) sea una función de probabilidad, el valor de \(K\) debe ser \(0.04\). Además, debe cumplirse que \(p(x) \geq 0\) para todos los valores de \(x\). Dado que \(K\) es positivo y \(x + 3\) es siempre positivo para \(x \geq 0\), esta condición también se cumple.
 
-\item Calcular la esperanza y la varianza del número de efectos adversos por paciente.
+\item \textbf{Calcular la esperanza y la varianza del número de efectos adversos por paciente.}
+\medskip
 
 La \textbf{esperanza} \(E[X]\) de una variable aleatoria discreta se calcula como:
 \[
@@ -159,17 +165,19 @@ Finalmente:
 Var(X) = 7.6 - (2.4)^2 = 7.6 - 5.76 = 1.84
 \]
 
-\item Calcular:
+\item \textbf{Calcular:}
 \begin{enumerate}
 
-\item La probabilidad de que un paciente presente exactamente 1 efecto adverso.
+\item \textbf{La probabilidad de que un paciente presente exactamente 1 efecto adverso.}
+\medskip
 
 Evaluamos la función de probabilidad en \(x = 1\):
 \[
 P(X=1) = p(1) = 0.04(1+3) = 0.16
 \]
 
-\item La probabilidad de que presente al menos 2 efectos adversos.
+\item \textbf{La probabilidad de que presente al menos 2 efectos adversos.}
+\medskip
 
 Sumamos las probabilidades para \(x \geq 2\):
 \[
@@ -182,7 +190,8 @@ P(X \geq 2) = P(X=2) + P(X=3) + P(X=4)
 = 0.20 + 0.24 + 0.28 = 0.72
 \]
 
-\item La probabilidad de que presente como máximo 3 efectos adversos.
+\item \textbf{La probabilidad de que presente como máximo 3 efectos adversos.}
+\medskip
 
 Sumamos las probabilidades para \(x \leq 3\):
 \[
@@ -214,6 +223,252 @@ En un reciente estudio sobre la incidencia de ceguera en personas con diabetes i
 
 ## Resolución
 
+\begin{enumerate}
+
+\item[a)] \textbf{Calcular la probabilidad de que exactamente 2 de 200 hombres DID de 30-39 años se vuelvan ciegos en un año.}
+\medskip
+
+La tasa anual de ceguera en hombres DID de 30-39 años es del \(0.67\%\). Expresado como probabilidad, esto equivale a:
+
+\[
+p_h = \frac{0.67}{100} = 0.0067
+\]
+
+Nos encontramos ante un experimento compuesto por un número fijo de ensayos independientes, donde cada individuo puede presentar o no el evento de interés (ceguera), con probabilidad constante. Por tanto, modelamos la variable aleatoria como una \textbf{distribución binomial}:
+
+\[
+X \sim \text{Bin}(n=200,\, p=0.0067)
+\]
+
+La función de probabilidad de una distribución binomial viene dada por:
+
+\[
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+
+En este caso queremos calcular la probabilidad de que exactamente 2 hombres se vuelvan ciegos en un año, es decir:
+
+\[
+P(X=2) = \binom{200}{2} (0.0067)^2 (1-0.0067)^{200-2}
+\]
+
+Sustituyendo:
+
+\[
+P(X=2) = \binom{200}{2} (0.0067)^2 (0.9933)^{198}
+\]
+
+Calculamos el coeficiente binomial:
+
+\[
+\binom{200}{2} = \frac{200 \cdot 199}{2} = 19900
+\]
+
+Entonces:
+
+\[
+P(X=2) = 19900 \cdot (0.0067)^2 \cdot (0.9933)^{198}
+\approx 0.2360
+\]
+
+Por tanto, la probabilidad de que exactamente 2 de los 200 hombres se vuelvan ciegos en un año es aproximadamente \(0.2360\).
+
+\item[b)] \textbf{Calcular la probabilidad de que una mujer DID de 30 años se vuelva ciega en los próximos 10 años, y compararla con la de un hombre.}
+\medskip
+
+Según el enunciado, la tasa anual de ceguera es:
+
+\begin{itemize}
+\item En mujeres DID de 30-39 años: \(0.74\%\)
+\item En hombres DID de 30-39 años: \(0.67\%\)
+\end{itemize}
+
+Expresadas como probabilidades:
+
+\[
+p_m = \frac{0.74}{100} = 0.0074
+\qquad
+p_h = \frac{0.67}{100} = 0.0067
+\]
+
+Queremos calcular la probabilidad de que una persona se vuelva ciega en los próximos 10 años. Para ello, resulta más sencillo calcular primero la probabilidad complementaria, es decir, la probabilidad de que no se vuelva ciega en ninguno de esos 10 años.
+
+Si \(p\) es la probabilidad anual de ceguera, entonces:
+
+\[
+P(\text{no ceguera en 1 año}) = 1-p
+\]
+
+Suponiendo independencia entre años, la probabilidad de no presentar ceguera en 10 años es:
+
+\[
+P(\text{no ceguera en 10 años}) = (1-p)^{10}
+\]
+
+Por tanto, la probabilidad de presentar ceguera al menos una vez en ese periodo será:
+
+\[
+P(\text{ceguera en 10 años}) = 1 - (1-p)^{10}
+\]
+
+Para una mujer:
+
+\[
+P(\text{ceguera en 10 años}) = 1 - (1-0.0074)^{10}
+\]
+
+\[
+= 1 - (0.9926)^{10}
+\approx 0.0716
+\]
+
+Para un hombre:
+
+\[
+P(\text{ceguera en 10 años}) = 1 - (1-0.0067)^{10}
+\]
+
+\[
+= 1 - (0.9933)^{10}
+\approx 0.0650
+\]
+
+Por tanto, la probabilidad de que una mujer DID de 30 años se vuelva ciega en los próximos 10 años es aproximadamente \(0.0716\), mientras que para un hombre es aproximadamente \(0.0650\).
+
+\item[c)] \textbf{Calcular la probabilidad de que exactamente 3 de las 20 personas se vuelvan ciegas en 10 años.}
+\medskip
+
+En este apartado se consideran 10 hombres DID de 30-39 años y 10 mujeres DID de 30-39 años. A partir del apartado anterior, hemos obtenido las probabilidades de que una persona se vuelva ciega en 10 años:
+
+\[
+p_h = 1 - (1 - 0.0067)^{10} \approx 0.0650
+\]
+\[
+p_m = 1 - (1 - 0.0074)^{10} \approx 0.0716
+\]
+
+Definimos las variables aleatorias:
+
+\[
+X_h \sim \text{Bin}(10, 0.0650), \qquad X_m \sim \text{Bin}(10, 0.0716)
+\]
+
+donde:
+
+\begin{itemize}
+\item \(X_h\) representa el número de hombres que se vuelven ciegos en 10 años.
+\item \(X_m\) representa el número de mujeres que se vuelven ciegas en 10 años.
+\end{itemize}
+
+La variable total será:
+
+\[
+X = X_h + X_m
+\]
+
+Queremos calcular:
+
+\[
+P(X = 3)
+\]
+
+Como \(X_h\) y \(X_m\) son independientes, aplicamos la convolución de probabilidades:
+
+\[
+P(X = 3) = \sum_{k=0}^{3} P(X_h = k)\,P(X_m = 3-k)
+\]
+
+Es decir:
+
+\[
+P(X = 3) = P(X_h = 0)P(X_m = 3)
++ P(X_h = 1)P(X_m = 2)
++ P(X_h = 2)P(X_m = 1)
++ P(X_h = 3)P(X_m = 0)
+\]
+
+Calculamos cada término con la fórmula de la distribución binomial:
+
+\[
+P(X_h = k) = \binom{10}{k}(0.0650)^k(0.9350)^{10-k}
+\]
+\[
+P(X_m = k) = \binom{10}{k}(0.0716)^k(0.9284)^{10-k}
+\]
+
+Sustituyendo y sumando los cuatro casos posibles, obtenemos:
+
+\[
+P(X = 3) \approx 0.1091
+\]
+
+Por tanto, la probabilidad de que exactamente 3 de las 20 personas se vuelvan ciegas en 10 años es aproximadamente \(0.1091\).
+
+\item[d)] \textbf{Calcular la probabilidad de que al menos 2 de las 20 personas se vuelvan ciegas en 10 años.}
+\medskip
+
+Seguimos considerando las mismas probabilidades obtenidas en el apartado anterior:
+
+\[
+p_h \approx 0.0650, \qquad p_m \approx 0.0716
+\]
+
+y la variable total:
+
+\[
+X = X_h + X_m
+\]
+
+Queremos calcular:
+
+\[
+P(X \geq 2)
+\]
+
+Resulta más sencillo usar el complemento:
+
+\[
+P(X \geq 2) = 1 - P(X = 0) - P(X = 1)
+\]
+
+Primero, calculamos la probabilidad de que ninguna de las 20 personas se vuelva ciega:
+
+\[
+P(X = 0) = P(X_h = 0)\,P(X_m = 0)
+\]
+
+\[
+P(X = 0) = (1-0.0650)^{10}(1-0.0716)^{10}
+\approx 0.2429
+\]
+
+Ahora calculamos la probabilidad de que exactamente una persona se vuelva ciega. Esto puede ocurrir de dos formas:
+
+\begin{itemize}
+\item \(X_h\) que exactamente 1 hombre se vuelva ciego y ninguna mujer,
+\item \(X_m\) que ningún hombre se vuelva ciego y exactamente 1 mujer se vuelva ciega.
+\end{itemize}
+
+\[
+P(X = 1) = P(X_h = 1)P(X_m = 0) + P(X_h = 0)P(X_m = 1)
+\]
+
+\[
+P(X = 1)
+= \binom{10}{1}(0.0650)(0.9350)^9(0.9284)^{10}
++ (0.9350)^{10}\binom{10}{1}(0.0716)(0.9284)^9
+\approx 0.3562
+\]
+
+Entonces:
+
+\[
+P(X \geq 2) = 1 - 0.2429 - 0.3562 = 0.4009
+\]
+
+Por tanto, la probabilidad de que al menos 2 de las 20 personas se vuelvan ciegas en 10 años es aproximadamente \(0.4009\).
+
+\end{enumerate}
 
 # Ejercicio 3
 
@@ -248,3 +503,201 @@ En la población se sabe que el \(40\%\) son hombres y que el \(10\%\) de los in
 \end{enumerate}
 
 ## Resolución
+
+\begin{enumerate}
+\item[a)] \textbf{Calcular la probabilidad de que un hombre pese más de \(86\,\text{kg}\).}
+\medskip
+
+Dado que el peso de los hombres sigue una distribución normal \(P_h \sim N(78, 8)\), queremos calcular:
+
+\[
+P(P_h > 86)
+\]
+
+Primero, estandarizamos la variable:
+
+\[
+Z = \frac{P_h - \mu}{\sigma} = \frac{86- 78}{8} = 1
+\]
+
+Entonces:
+
+\[
+P(P_h > 86) = P(Z > 1) = 1 - P(Z \leq 1) = 1 - 0.8413 = 0.1587
+\]
+
+Por tanto, la probabilidad de que un hombre pese más de \(86\,\text{kg}\) es aproximadamente \(0.1587\).
+
+\item[b)] \textbf{Calcular la probabilidad de que un individuo pese más de \(70\,\text{kg}\).}
+\medskip
+
+Dado que el \(40\%\) de la población son hombres y el \(60\%\) son mujeres, la distribución del peso en la población general es una mezcla de las distribuciones de hombres y mujeres. Por tanto, la probabilidad de que un individuo pese más de \(70\,\text{kg}\) se calcula como:
+
+\[
+P(P > 70) = P(P > 70 \mid \text{Hombre})P(\text{Hombre}) + P(P > 70 \mid \text{Mujer})P(\text{Mujer})
+\]
+
+Calculamos cada término por separado:
+
+\[
+P(P > 70 \mid \text{Hombre}) = P\left(Z >\frac{70 - 78}{8}\right) = P(Z > -1) = 0.8413
+\]
+
+\[
+P(P > 70 \mid \text{Mujer}) = P\left(Z > \frac{70 - 65}{7}\right) = P(Z > 0.7143) = 0.2375
+\]
+
+Entonces:
+
+\[
+P(P > 70) = 0.8413 \cdot 0.4 + 0.2375 \cdot 0.6 = 0.3365 + 0.1425 = 0.479
+\]
+
+Por tanto, la probabilidad de que un individuo pese más de \(70\,\text{kg}\) es aproximadamente \(0.479\).
+
+\item[c)] \textbf{Indicar por qué es incorrecta la expresión \(P(\text{Hombre} \mid \text{peso} > 70) = P(\text{peso} > 70 \mid \text{Hombre})\) y calcular el valor correcto.}
+\medskip
+
+La expresión es incorrecta porque \(P(\text{Hombre} \mid \text{peso} > 70)\) representa la probabilidad de que un individuo sea hombre dado que pesa más de \(70\,\text{kg}\), mientras que \(P(\text{peso} > 70 \mid \text{Hombre})\) representa la probabilidad de que un hombre pese más de \(70\,\text{kg}\). Estas dos probabilidades no son iguales porque una se condiciona en el peso y la otra en el sexo.
+Para calcular \(P(\text{Hombre} \mid \text{peso} > 70)\), utilizamos el teorema de Bayes:
+
+\[
+P(\text{Hombre} \mid \text{peso} > 70) =\frac{P(\text{peso} > 70 \mid \text{Hombre})P(\text{Hombre})}{P(\text{peso} > 70)}
+\]
+
+Sustituyendo los valores obtenidos en los apartados anteriores:
+
+\[
+P(\text{Hombre} \mid \text{peso} > 70) = \frac{0.8413 \cdot 0.4}{0.479} \approx 0.7018
+\]
+
+Por tanto, la probabilidad de que un individuo sea hombre dado que pesa más de \(70\,\text{kg}\) es aproximadamente \(0.7018\).
+
+\item[d)] \textbf{Indicar si la afirmación sobre el percentil 95 del peso en hombres es correcta y calcular su valor numérico.}
+\medskip
+
+La afirmación del estudiante es incorrecta. El percentil 95 de una distribución normal es
+el valor que deja el \(95\%\) de los datos por debajo, no por encima. Para calcular el percentil 95 del peso en hombres, utilizamos la fórmula:
+
+\[
+P_{95} = \mu + z_{0.95} \cdot \sigma
+\]
+
+Donde \(z_{0.95}\) es el valor crítico de la distribución normal estándar correspondiente al percentil 95, que es aproximadamente \(1.645\). Entonces:
+
+\[
+P_{95} = 78 + 1.645 \cdot 8 = 78 + 13.16 = 91.16
+\]
+
+Por tanto, el percentil 95 del peso en hombres es aproximadamente \(91.16\,\text{kg}\).
+
+\item[e)] \textbf{Calcular la probabilidad de que una plataforma elevadora que soporta\(240\,\text{kg}\) aguante el peso de 3 personas.}
+
+Supongamos que las 3 personas son seleccionadas al azar de la población general, de manera independiente. El peso de cada persona depende de su sexo.
+
+\begin{itemize}
+\item Hombres: \(P_h \sim N(78, 8)\)
+\item Mujeres: \(P_m \sim N(65, 7)\)
+\end{itemize}
+
+Además, se sabe que el 40 \% de la población son hombres y el 60 \% mujeres.
+
+En este caso, no es correcto afirmar directamente que la suma de los pesos de 3 personas sigue una única distribución normal obtenida a partir de la mezcla poblacional. La forma correcta de resolver el problema es condicionar por el número de hombres entre las 3 personas.
+
+Sea \(K\) el número de hombres entre las 3 personas seleccionadas. Entonces:
+
+\[
+K \sim \text{Bin}(3, 0.4)
+\]
+
+Los posibles valores de \(K\) son \(0,1,2,3\). Para cada caso, la suma total de pesos \(S\) sigue una distribución normal, ya que es la suma de variables normales independientes dentro de cada composición.
+
+\textbf{Caso 1: \(K=0\) (3 mujeres).}
+
+\[
+S \mid K=0 \sim N(3\cdot 65,\; 3\cdot 7^2) = N(195,\; 147)
+\]
+
+\[
+P(S \leq 240 \mid K=0)
+= P\left(Z \leq \frac{240-195}{\sqrt{147}}\right)
+= P(Z \leq 3.71)
+\approx 0.9999
+\]
+
+\textbf{Caso 2: \(K=1\) (1 hombre y 2 mujeres).}
+
+\[
+S \mid K=1 \sim N(78 + 2\cdot 65,\; 8^2 + 2\cdot 7^2)
+= N(208,\; 162)
+\]
+
+\[
+P(S \leq 240 \mid K=1)
+= P\left(Z \leq \frac{240-208}{\sqrt{162}}\right)
+= P(Z \leq 2.51)
+\approx 0.9940
+\]
+
+\textbf{Caso 3: \(K=2\) (2 hombres y 1 mujer).}
+
+\[
+S \mid K=2 \sim N(2\cdot 78 + 65,\; 2\cdot 8^2 + 7^2)
+= N(221,\; 177)
+\]
+
+\[
+P(S \leq 240 \mid K=2)
+= P\left(Z \leq \frac{240-221}{\sqrt{177}}\right)
+= P(Z \leq 1.43)
+\approx 0.9236
+\]
+
+\textbf{Caso 4: \(K=3\) (3 hombres).}
+
+\[
+S \mid K=3 \sim N(3\cdot 78,\; 3\cdot 8^2)
+= N(234,\; 192)
+\]
+
+\[
+P(S \leq 240 \mid K=3)
+= P\left(Z \leq \frac{240-234}{\sqrt{192}}\right)
+= P(Z \leq 0.43)
+\approx 0.6681
+\]
+
+Ahora ponderamos cada caso por su probabilidad:
+
+\[
+P(K=0) = (0.6)^3 = 0.216
+\]
+\[
+P(K=1) = \binom{3}{1}(0.4)(0.6)^2 = 0.432
+\]
+\[
+P(K=2) = \binom{3}{2}(0.4)^2(0.6) = 0.288
+\]
+\[
+P(K=3) = (0.4)^3 = 0.064
+\]
+
+Por la ley de la probabilidad total:
+
+\[
+P(S \leq 240)
+= \sum_{k=0}^{3} P(S \leq 240 \mid K=k)\,P(K=k)
+\]
+
+\[
+P(S \leq 240)
+= (0.9999)(0.216) + (0.9940)(0.432) + (0.9236)(0.288) + (0.6681)(0.064)
+\]
+
+\[
+P(S \leq 240) \approx 0.9541
+\]
+
+Por tanto, la probabilidad de que la plataforma aguante el peso de las 3 personas es aproximadamente \(0.9541\).
+
+\end{enumerate}
