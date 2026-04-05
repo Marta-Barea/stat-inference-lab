@@ -380,12 +380,13 @@ P(X = 3) = \sum_{k=0}^{3} P(X_h = k)\,P(X_m = 3-k)
 
 Es decir:
 
-\[
-P(X = 3) = P(X_h = 0)P(X_m = 3)
-+ P(X_h = 1)P(X_m = 2)
-+ P(X_h = 2)P(X_m = 1)
-+ P(X_h = 3)P(X_m = 0)
-\]
+\begin{align*}
+P(X = 3)
+&= P(X_h = 0)P(X_m = 3) \\
+&\quad + P(X_h = 1)P(X_m = 2) \\
+&\quad + P(X_h = 2)P(X_m = 1) \\
+&\quad + P(X_h = 3)P(X_m = 0)
+\end{align*}
 
 Calculamos cada término con la fórmula de la distribución binomial:
 
@@ -568,10 +569,10 @@ P(\text{Hombre} \mid \text{peso} > 70) =\frac{P(\text{peso} > 70 \mid \text{Homb
 Sustituyendo los valores obtenidos en los apartados anteriores:
 
 \[
-P(\text{Hombre} \mid \text{peso} > 70) = \frac{0.8413 \cdot 0.4}{0.479} \approx 0.7018
+P(\text{Hombre} \mid \text{peso} > 70) = \frac{0.8413 \cdot 0.4}{0.479} \approx 0.7025
 \]
 
-Por tanto, la probabilidad de que un individuo sea hombre dado que pesa más de \(70\,\text{kg}\) es aproximadamente \(0.7018\).
+Por tanto, la probabilidad de que un individuo sea hombre dado que pesa más de \(70\,\text{kg}\) es aproximadamente \(0.7025\).
 
 \item[d)] \textbf{Indicar si la afirmación sobre el percentil 95 del peso en hombres es correcta y calcular su valor numérico.}
 \medskip
