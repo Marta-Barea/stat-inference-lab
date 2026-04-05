@@ -687,8 +687,8 @@ P(\text{suma} \leq 240)
 + 0.9940 \cdot 0.432
 + 0.9236 \cdot 0.288
 + 0.6681 \cdot 0.064
-\approx 0.954
+\approx 0.9541
 \]
 
-Por tanto, la probabilidad de que la plataforma aguante el peso de las 3 personas es aproximadamente \(0.954\).
+Por tanto, la probabilidad de que la plataforma aguante el peso de las 3 personas es aproximadamente \(0.9541\).
 \end{enumerate}
