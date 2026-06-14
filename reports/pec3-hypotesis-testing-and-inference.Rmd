@@ -1,0 +1,492 @@
+---
+title: "Tercera Prueba de Evaluación Continua"
+author: "Dra. Marta Barea Sepúlveda"
+date: "16 de junio de 2026"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    highlight: tango
+    latex_engine: pdflatex
+    keep_tex: false
+    includes:
+      in_header: preamble.tex
+  word_document:
+    toc: true
+    toc_depth: '3'
+  html_document:
+    toc: true
+    toc_depth: '3'
+    df_print: paged
+classoption: twoside
+geometry: top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm
+fontsize: 11pt
+lang: es
+---
+
+\clearpage
+\pagestyle{plain}
+\setcounter{page}{1}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, tidy = FALSE) 
+```
+
+# Ejercicio 1
+
+## Enunciado
+
+Un equipo de estadísticos/as da soporte metodológico a distintos grupos de investigación en un centro de investigación biomédica. De manera habitual, los investigadores plantean preguntas concretas sobre sus estudios y solicitan asesoramiento para decidir qué tipo de análisis o contraste de hipótesis es el más adecuado en cada caso para alcanzar el objetivo planteado, antes de proceder al análisis detallado de los datos.
+
+Las cuestiones que se presentan a continuación corresponden a situaciones reales o plausibles a las que se enfrenta este equipo de estadísticos en su labor de asesoramiento.
+
+Para cada situación que se presenta a continuación:
+
+(i) Indica el tipo de análisis o pruebas estadísticas que utilizarías en cada caso y, de ser necesario, cualquier prueba adicional.
+
+(ii) Explica cómo se efectúa el análisis
+
+(iii) Formula la hipótesis que se debe contrastar según las preguntas del enunciado y justifica su elección.
+
+Ten en cuenta que la solución a cada pregunta puede no ser única y que para este ejercicio no es necesario realizar ningún cálculo.
+
+**Situación 1**
+
+Se realiza un estudio de salud respiratoria en el que se pretende analizar la relación entre la exposición laboral a polvo industrial (sí/no) y la presencia de bronquitis crónica (sí/no). Se dispone de información de 212 trabajadores clasificados según ambas variables. Se sabe que en la población general la prevalencia de bronquitis crónica es del 6%.
+
+El objetivo del estudio es determinar si la presencia de bronquitis crónica es independiente de la exposición laboral al polvo.
+
+**Situación 2**
+
+La capacidad de concentración puede verse alterada en pacientes con trastorno por déficit de atención e hiperactividad (TDAH). En un estudio transversal se compara el tiempo necesario para completar una prueba de atención sostenida entre pacientes diagnosticados de TDAH y controles sanos.
+
+Se reclutan 64 pacientes con TDAH y 64 controles sanos. El análisis gráfico muestra una distribución aproximadamente simétrica del tiempo empleado en ambos grupos, aunque se observa una mayor dispersión en el grupo de pacientes con TDAH.
+
+El objetivo del estudio es evaluar si existen diferencias en el tiempo medio de realización de la prueba entre ambos grupos.
+
+**Situación 3**
+
+Se dispone de 86 pacientes diagnosticados de migraña crónica. Los pacientes se clasifican en dos grupos según la calidad del descanso nocturno:
+
+- Grupo con sueño insuficiente (< 6 horas/día)
+- Grupo con sueño adecuado ($\geq$ 6 horas/día)
+
+A todos los pacientes se les mide una escala discreta de intensidad de dolor con valores entre 0 y 10.
+
+El objetivo del estudio es determinar si la calidad del sueño está relacionada con la intensidad del dolor de las migrañas.
+
+**Situación 4**
+
+Se incluyen 180 pacientes que han sido diagnosticados con diabetes tipo 2 y a los que se quiere controlar el nivel glucémico medido en HbA1c (% de Hemoglobina glicosilada de los últimos 3 meses). Se considera que la diabetes está controlada si el nivel de HbA1c (%) está por debajo del 6.5%. A los pacientes se les asigna aleatoriamente a uno de los tres tratamientos:
+
+- Metformina
+- Insulina
+- Terapia combinada
+
+Se mide la HbA1c (%) al final del seguimiento y se desea evaluar si existen diferencias en los niveles de HbA1c y si existen diferencias en el número de pacientes con la diabetes controlada.
+
+**Situación 5**
+
+En un estudio piloto sobre rehabilitación física se evalúa el efecto de un programa de ejercicios sobre la capacidad pulmonar en pacientes con enfermedad pulmonar obstructiva leve.
+
+Se incluyen 12 pacientes a los que se les mide la capacidad vital forzada (CVF) en litros antes de iniciar el programa y tras 8 semanas de tratamiento.
+
+El objetivo del estudio es determinar si el programa de rehabilitación produce cambios en la capacidad vital forzada de los pacientes.
+
+## Resolución
+
+### Situación 1
+
+**(i) Tipo de análisis:**
+
+Para analizar la asociación entre dos variables categóricas con dos opciones posibles (exposición laboral: sí/no; bronquitis crónica: sí/no) en una tabla de contingencia 2×2, la prueba más adecuada es el **test chi-cuadrado de Pearson** ($\chi^2$). Se trata de un contraste de independencia que evalúa si existe asociación estadísticamente significativa entre las variables. El dato de que la prevalencia poblacional de bronquitis crónica es del 6% aporta contexto epidemiológico, pero no cambia el contraste principal, que sigue siendo el de independencia en una tabla 2×2.
+
+En caso de que alguna frecuencia esperada sea menor que 5 (condición que puede verificarse tras tabular los datos), la aproximación chi-cuadrado pierde validez y debe recurrirse a la **prueba exacta de Fisher**, que calcula directamente la probabilidad de observar una configuración al menos tan extrema bajo la hipótesis nula.
+
+Además, para resumir la fuerza de esa relación, el **odds ratio** (OR) permite ver si la bronquitis es más frecuente en los expuestos que en los no expuestos.
+
+Aunque el objetivo principal es estudiar la independencia entre exposición y bronquitis, también podría plantearse de forma complementaria un contraste para evaluar si la prevalencia observada en la muestra difiere de la prevalencia poblacional del 6%.
+
+**(ii) Cómo se efectúa el análisis:**
+
+El test chi-cuadrado de Pearson cuantifica la discrepancia entre las frecuencias observadas ($O_{ij}$) y las frecuencias esperadas bajo la hipótesis nula de independencia ($E_{ij}$):
+
+$$\chi^2 = \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+
+Las frecuencias esperadas se calculan como $E_{ij} = \frac{(fila_i \ total) \times (columna_j \ total)}{n \ total}$. Con tamaño muestral suficiente, el estadístico resultante sigue de forma aproximada una distribución $\chi^2$ con $(2-1)(2-1) = 1$ grado de libertad.
+
+**Supuestos y limitaciones:**
+
+- **Tamaño muestral suficiente:** la regla habitual exige que todas las frecuencias esperadas sean $\geq 5$ para que la aproximación chi-cuadrado sea fiable. Si esta condición no se cumple, Fisher es preferible.
+- **Independencia de las observaciones:** cada sujeto debe contribuir a una sola celda, sin medidas repetidas.
+- **Variables categóricas:** ambas deben ser nominales u ordinales sin ordenada implícita.
+
+Si los supuestos no se cumplen, se deben considerar alternativas cuando sea posible, o usar la prueba exacta de Fisher.
+
+**(iii) Hipótesis y justificación:**
+
+- **$H_0$:** La exposición laboral al polvo industrial y la presencia de bronquitis crónica son independientes: $P(\text{bronquitis} | \text{expuesto}) = P(\text{bronquitis} | \text{no expuesto})$.
+- **$H_1$:** Existe asociación entre la exposición laboral y la bronquitis crónica: $P(\text{bronquitis} | \text{expuesto}) \neq P(\text{bronquitis} | \text{no expuesto})$.
+
+Se elige este contraste porque el objetivo explícito del estudio es determinar si existe independencia entre las variables, y el test chi-cuadrado es el método estándar para tablas de contingencia. La dirección y magnitud de la asociación se pueden explorar complementariamente con el odds ratio: OR = 1 indica independencia; OR > 1 indica factor de riesgo (los expuestos tienen mayor probabilidad de bronquitis); OR < 1 indica factor protector.
+
+
+### Situación 2
+
+**(i) Tipo de análisis:**
+
+Para comparar las medias de una variable numérica (tiempo de atención en segundos) entre dos grupos independientes (TDAH vs controles), y siendo las distribuciones aproximadamente simétricas, la prueba más adecuada es la **t de Student**. No obstante, al mirar los datos parece que el grupo TDAH tiene más dispersión. Por tanto, conviene usar la **versión de Welch**, que no exige que ambos grupos tengan una variabilidad parecida.
+
+Como paso previo o complementario, un **test de Levene** permite comprobar si esa diferencia de dispersión entre grupos es importante y suele preferirse porque funciona mejor cuando la normalidad no es perfecta. Si se confirma que las varianzas no son parecidas, Welch es la elección correcta.
+
+**(ii) Cómo se efectúa el análisis:**
+
+La t de Welch-Satterthwaite contrasta:
+
+$$H_0: \mu_1 = \mu_2 \quad \text{vs} \quad H_1: \mu_1 \neq \mu_2$$
+
+utilizando el estadístico:
+
+$$t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+La diferencia clave respecto a la t de Student clásica es que los grados de libertad se recalculan mediante la fórmula de Welch-Satterthwaite:
+
+$$gl = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{s_1^4}{n_1^2(n_1-1)} + \frac{s_2^4}{n_2^2(n_2-1)}}$$
+
+**Supuestos y alternativas:**
+
+- **Normalidad:** aunque la t es moderadamente robusta a desviaciones de normalidad (especialmente con tamaños muestrales grandes como n=64), si la simetría mencionada en el enunciado es cuestionable, pueden aplicarse tests de normalidad previos o usar Bootstrap.
+- **Independencia:** los grupos deben ser independientes (distintos sujetos).
+- **Escala de medida:** la variable tiempo debe ser al menos de intervalo.
+
+Si la normalidad no se sostiene, una alternativa sería la **U de Mann-Whitney**, aunque esta prueba compara sobre todo si un grupo tiende a dar valores más altos o más bajos que el otro, no tanto las medias.
+
+**(iii) Hipótesis y justificación:**
+
+- **$H_0$:** $\mu_{TDAH} = \mu_{controles}$ (no hay diferencias en el tiempo medio de atención entre grupos).
+- **$H_1$:** $\mu_{TDAH} \neq \mu_{controles}$ (existen diferencias en el tiempo medio).
+
+Se elige contraste bilateral porque el enunciado pregunta por diferencias sin especificar dirección causal. Se justifica la elección de Welch porque la inspección gráfica sugiere posible heterogeneidad de varianzas, algo que podría verificarse formalmente con un test de Levene. Si se aplicara la t clásica asumiendo varianzas iguales cuando en realidad difieren, el error tipo I se inflaría y los resultados serían inseguros. Además, con n=64 la potencia estadística es adecuada para detectar efectos moderados.
+
+
+### Situación 3
+
+**(i) Tipo de análisis:**
+
+Para comparar una escala ordenada como la intensidad del dolor de 0 a 10 entre dos grupos independientes, la prueba más razonable es la **U de Mann-Whitney** (también conocida como test de Mann-Whitney-Wilcoxon). Esta prueba ordena los valores de menor a mayor y no necesita asumir normalidad. Aquí no se estudia una relación en sentido correlacional, sino si el dolor tiende a ser distinto entre los dos grupos definidos por la calidad del sueño.
+
+Dado que la calidad del sueño define dos grupos, el problema puede plantearse como una comparación de distribuciones entre grupos. Alternativamente, también podría estudiarse la asociación mediante un modelo de regresión ordinal si se quisiera un enfoque más directamente orientado a la relación entre variables.
+
+Una alternativa sería la t de Student si los datos se aproximan bastante a una distribución normal, pero como la escala es discreta y ordenada, se opta por Mann-Whitney como opción más prudente. Si se quisiera estudiar de forma más directa la relación entre calidad del sueño e intensidad del dolor, también podría plantearse un **modelo de regresión ordinal** o incluso una medida como **Spearman**.
+
+**(ii) Cómo se efectúa el análisis:**
+
+El test U de Mann-Whitney compara las distribuciones de los dos grupos mediante sus rangos. El procedimiento es:
+
+1. Combinar todas las observaciones y asignar rangos (1 al menor, N al mayor).
+2. Sumar los rangos de cada grupo: $R_1$ y $R_2$.
+3. Calcular $U_1 = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1$ y análogamente para $U_2$.
+4. Usar $U = \min(U_1, U_2)$.
+
+Para muestras pequeñas, la distribución exacta de U permite calcular el p-valor directamente. Para muestras grandes (típicamente $n_1, n_2 \geq 10$), U se aproxima a una normal:
+
+$$z = \frac{U - \mu_U}{\sigma_U}, \quad \mu_U = \frac{n_1 n_2}{2}, \quad \sigma_U = \sqrt{\frac{n_1 n_2(n_1 + n_2 + 1)}{12}}$$
+
+**Supuestos:**
+
+- **Independencia:** los grupos son independientes y las observaciones dentro de cada grupo son independientes.
+- **Escala al menos ordinal:** las diferencias entre valores deben ser interpretables como "mayor que".
+- **Sin restricción en la forma de las distribuciones:** a diferencia de la t, no requiere normalidad.
+
+Si los datos son claramente ordinales y no se cumplen los supuestos paramétricos, Mann-Whitney es la prueba preferida.
+
+**(iii) Hipótesis y justificación:**
+
+- **$H_0$:** La distribución de la intensidad del dolor es la misma en ambos grupos de calidad del sueño.
+- **$H_1$:** La distribución de la intensidad del dolor difiere entre los grupos de calidad del sueño.
+
+Se justifica la elección de Mann-Whitney por tres razones: (1) la escala 0-10 es ordinal, donde las diferencias entre valores consecutivos no son necesariamente iguales; (2) se desea ser conservador respecto a los supuestos de normalidad; (3) la prueba de rangos es más robusta ante valores atípicos que podrían distorsionar la media. Además, esta prueba contrasta diferencias de distribución o de posición entre grupos, que es justamente lo que encaja con el objetivo formulado en el enunciado.
+
+
+### Situación 4
+
+**(i) Tipo de análisis:**
+
+El problema requiere dos análisis distintos según el tipo de variable respuesta:
+
+Para la variable **numérica** (HbA1c en %) comparada entre tres grupos, la prueba habitual es el **ANOVA de un factor**. Si el contraste global resulta significativo, comparaciones posteriores como **Tukey HSD** permiten identificar qué pares de tratamientos difieren. Si no se cumplen bien los supuestos del ANOVA clásico, las alternativas naturales son el **ANOVA de Welch** o el **test de Kruskal-Wallis**, según el problema detectado.
+
+Para la variable **sí/no** de diabetes controlada comparada entre tres grupos, la prueba adecuada es el **chi-cuadrado de homogeneidad**, que evalúa si el porcentaje de pacientes controlados es parecido en los tres tratamientos. Si las frecuencias esperadas son bajas, conviene recurrir a una alternativa exacta o a una aproximación de **Monte Carlo**. Si el contraste global resulta significativo, el siguiente paso sería comparar los grupos de dos en dos corrigiendo por comparaciones múltiples, por ejemplo con Bonferroni o Holm.
+
+**(ii) Cómo se efectúa el análisis:**
+
+El ANOVA de un factor descompone la variabilidad total en variabilidad **entre grupos** y variabilidad **dentro de grupos**:
+
+$$\text{CM}_{\text{entre}} = \frac{\sum_{i=1}^{k} n_i (\bar{X}_i - \bar{\bar{X}})^2}{k-1}, \quad \text{CM}_{\text{dentro}} = \frac{\sum_{i=1}^{k} \sum_{j=1}^{n_i} (X_{ij} - \bar{X}_i)^2}{N-k}$$
+
+El estadístico F es:
+
+$$\text{F} = \frac{\text{CM}_{\text{entre}}}{\text{CM}_{\text{dentro}}} \sim F_{(k-1, N-k)}$$
+
+**Supuestos del ANOVA:**
+
+- **Normalidad** de los residuos en cada grupo.
+- **Varianzas parecidas entre grupos**: puede verificarse con el test de Levene o Bartlett.
+- **Independencia** de las observaciones.
+
+En este contexto, la asignación aleatoria de los pacientes a los tres tratamientos favorece precisamente el cumplimiento del supuesto de independencia entre grupos.
+
+Si la homogeneidad de varianzas no se cumple, existen alternativas como el **ANOVA de Welch**. Si la normalidad falla, puede recurrirse al **test de Kruskal-Wallis** (alternativa no paramétrica del ANOVA).
+
+En caso de rechazo del ANOVA, Tukey HSD contrasta todos los pares:
+
+$$\text{Tukey HSD} = \bar{X}_i - \bar{X}_j \pm q_{\alpha, k, N-k} \sqrt{\frac{\text{CM}_{\text{dentro}}}{2}\left(\frac{1}{n_i} + \frac{1}{n_j}\right)}$$
+
+donde $q$ es el cuantil de la distribución del rango estudiante.
+
+Para el chi-cuadrado de homogeneidad, el procedimiento es idéntico al de independencia. El estadístico contrasta si las proporciones en cada grupo difieren significativamente. Si las frecuencias esperadas son demasiado bajas, puede sustituirse por un contraste exacto de Fisher generalizado o por una versión con simulación de Monte Carlo.
+
+**(iii) Hipótesis y justificación:**
+
+Para HbA1c:
+- **$H_0$:** $\mu_{Met} = \mu_{Ins} = \mu_{Comb}$ (las medias poblacionales son iguales).
+- **$H_1$:** Al menos una media difiere de las demás.
+
+Para diabetes controlada:
+- **$H_0$:** $p_{Met} = p_{Ins} = p_{Comb}$ (las proporciones de control son iguales).
+- **$H_1$:** Al menos una proporción difiere.
+
+Se eligen ambos tests porque el enunciado pregunta explícitamente por diferencias en ambas variables (la HbA1c, que es numérica, y la diabetes controlada, que se recoge como sí/no). ANOVA es la extensión natural de la t de Student cuando hay tres grupos, y chi-cuadrado es la opción habitual para comparar proporciones. Así se responde de forma completa a las dos preguntas del enunciado.
+
+
+### Situación 5
+
+**(i) Tipo de análisis:**
+
+Para comparar mediciones pareadas (antes/después del mismo paciente), el diseño es de **muestras relacionadas**. La prueba paramétrica adecuada es la **t de Student pareada** si las diferencias se distribuyen normalmente, o la **prueba de Wilcoxon** (signed-rank test) si no se cumple la normalidad. Previo al test, el **test de Shapiro-Wilk** permite verificar formalmente el supuesto de normalidad, aunque con un tamaño muestral tan pequeño como $n = 12$ conviene complementarlo con inspección gráfica de las diferencias.
+
+**(ii) Cómo se efectúa el análisis:**
+
+En el diseño pareado, se calculan las diferencias $d_i = X_{i,after} - X_{i,before}$ para cada sujeto. La t pareada contrasta si la media poblacional de estas diferencias es cero:
+
+$$t = \frac{\bar{d}}{s_d / \sqrt{n}} \sim t_{(n-1)}$$
+
+donde $\bar{d}$ es la media de las diferencias, $s_d$ la desviación típica de las diferencias, y $n$ el número de pares.
+
+Si las diferencias no siguen una distribución normal (p-valor de Shapiro-Wilk < 0.05), se utiliza la prueba de Wilcoxon, que trabaja con los rangos de las diferencias absolutas. Esta prueba contrasta si la mediana de las diferencias es cero. Incluso si Shapiro no resulta significativo, con $n = 12$ puede haber poca potencia para detectar desviaciones de normalidad, así que si el gráfico de diferencias o un boxplot generan dudas, Wilcoxon sigue siendo una opción razonable.
+
+**Supuestos y consideraciones:**
+
+- **Normalidad** de las diferencias (o suficientemente simétricas): evaluada con Shapiro-Wilk, pero también con apoyo gráfico por el tamaño muestral reducido. En muestras pequeñas como esta, la inspección gráfica de las diferencias es tan importante como el propio test por la baja potencia de Shapiro-Wilk.
+- **Independencia de los pares:** cada sujeto contribuye con un solo par de observaciones.
+- **Escala de intervalo:** la variable debe permitir restas con sentido.
+- **Sin valores atípicos extremos:** afectarían desproporcionadamente a $\bar{d}$.
+
+Si la normalidad no se cumple, el test de Wilcoxon es más apropiado. También puede considerarse el **test de los signos** si se dispone de muy pocas observaciones.
+
+**(iii) Hipótesis y justificación:**
+
+- **$H_0$:** $\mu_d = 0$ (el programa de rehabilitación no produce cambios en la CVF).
+- **$H_1$:** $\mu_d \neq 0$ (el programa produce cambios en la CVF).
+
+Se justifica el diseño pareado porque el enunciado indica que son los mismos 12 pacientes medidos antes y después. Este diseño tiene dos ventajas: (1) **controla la variabilidad inter-sujeto**, eliminando el ruido asociado a diferencias individuales; (2) **aumenta la potencia estadística** al reducir la varianza total. La t pareada es más potente que la t para muestras independientes equivalente porque la variabilidad dentro de sujetos es típicamente menor que la variabilidad entre sujetos no relacionados.
+
+
+# Ejercicio 2
+
+## Enunciado
+
+Es conocido que la restricción de ingesta de sodio puede bajar la presión arterial en pacientes hipertensos. Sin embargo, es difícil restringir la restricción de sodio a largo plazo y sólo una intervención continuada de consejo dietético puede alcanzar este objetivo. Se dispone de 8 pacientes a los que se les recluta en el estudio piloto de diseño de la intervención. Los datos se recogen al momento inicial y un mes después de la intervención dietética.
+
+Excreción nocturna de Na (mEq/8hr) antes y después de la intervención dietética.
+
+| Sujeto | Nivel inicial | Datos al mes | Diferencia |
+|--------|--------------|--------------|------------|
+| 1      | 7.85         | 9.59         | -1.74      |
+| 2      | 12.03        | 34.50        | -22.47     |
+| 3      | 21.84        | 4.55         | 17.29      |
+| 4      | 13.94        | 20.78        | -6.84      |
+| 5      | 16.68        | 11.69        | 4.99       |
+| 6      | 41.78        | 32.51        | 9.27       |
+| 7      | 14.97        | 5.46         | 9.51       |
+| 8      | 12.07        | 12.95        | -0.88      |
+
+a) ¿Cuál es el test más adecuado para contrastar si la intervención dietética es efectiva?. Ejecuta el contraste e indica si la intervención es efectiva.
+
+b) ¿Cuál sería el tamaño muestral para tener una potencia del 90% de detectar una diferencia significativa en la media de excreción urinaria de Na al mes, si se usa un test unilateral con un error tipo I $\alpha$ = 0.05 a partir de los datos de la tabla anterior.
+
+c) Simula una muestra, del tamaño calculado en el apartado anterior, de la diferencia de niveles de excreción de Na antes/después, utilizando una distribución normal con la media y desviación típica del apartado anterior. Una vez tengas la simulación, asume que se trata de una nueva muestra de un estudio y contrasta si existen diferencias de excreción antes/después.
+
+d) Volviendo a los datos de la tabla, imagina que los datos no corresponden a los mismos individuos sino que son mediciones de un grupo de individuos a nivel basal (grupo control) y otro grupo que se sabe que fueron intervenidos hace un mes pero que no se dispone de datos basales (grupo intervención). Indica el contraste a realizar y evalúa si existen diferencias en los niveles de excreción de Na entre los dos grupos de control e intervención.
+
+e) Simula dos muestras independientes del tamaño calculado en el apartado b) utilizando distribuciones normales para la excreción basal y al mes con las medias y desviaciones típicas obtenidas en la tabla. Indica si en este caso existen diferencias en los niveles de excreción de Na entre los dos grupos simulados (control e intervención).
+
+## Resolución
+
+### Preparación de datos
+
+Primero se introducen los datos y se realiza un análisis descriptivo:
+
+```{r}
+inicial <- c(7.85, 12.03, 21.84, 13.94, 16.68, 41.78, 14.97, 12.07)
+mes <- c(9.59, 34.50, 4.55, 20.78, 11.69, 32.51, 5.46, 12.95)
+dif <- inicial - mes
+```
+
+En esta resolución se usa la misma definición de diferencia que aparece en la tabla del enunciado, es decir, `dif = inicial - mes`. Con esta convención, una intervención beneficiosa, entendida como una reducción de la excreción de sodio al mes, se traduce en valores positivos de `dif`. Este detalle es importante porque fija la dirección de la hipótesis alternativa.
+
+Visualizamos las distribuciones:
+
+```{r}
+par(mfrow = c(1, 3))
+hist(inicial, main = "Nivel inicial", xlab = "mEq/8hr", col = "lightblue")
+hist(mes, main = "Nivel al mes", xlab = "mEq/8hr", col = "lightgreen")
+hist(dif, main = "Diferencias", xlab = "mEq/8hr", col = "lightyellow")
+par(mfrow = c(1, 1))
+```
+
+
+### Apartado (a): ¿Es efectiva la intervención?
+
+Se pregunta si la intervención dietética produce un cambio significativo en la excreción de sodio. Como se dispone de las mismas personas medidas antes y después, es un diseño pareado. La prueba apropiada es una **t pareada** (**t de Student para muestras relacionadas**), previa verificación de la normalidad de las diferencias. En la práctica, esta t pareada puede implementarse como una t de una muestra aplicada a las diferencias.
+
+La idea es simple: se calcula la diferencia para cada sujeto y se contrasta si la media de estas diferencias es cero. Como una intervención efectiva debería reducir la excreción de sodio, con la definición `dif = inicial - mes` eso equivale a esperar diferencias medias mayores que cero. Por eso aquí tiene sentido usar un contraste unilateral, ya que lo que se quiere comprobar es si realmente hay una reducción de la excreción de sodio.
+
+$H_0$: $\mu_{dif} = 0$ (no hay cambio) vs $H_1$: $\mu_{dif} > 0$ (la intervención reduce la excreción de sodio).
+
+Antes de aplicar la t, se verifica normalidad con Shapiro-Wilk:
+
+```{r}
+shapiro <- shapiro.test(dif)
+shapiro
+```
+
+Se aplica la t pareada:
+
+```{r}
+t_test <- t.test(dif, mu = 0, alternative = "greater")
+t_test
+```
+
+En este caso, el p-valor es aproximadamente 0.40, mayor que 0.05. Por tanto, no se rechaza $H_0$ y no hay evidencia estadísticamente significativa de que la intervención dietética sea efectiva con estos datos. Esto no demuestra que la intervención sea ineficaz, sino que con esta muestra piloto no existe evidencia suficiente para detectar un efecto.
+
+
+### Apartado (b): Tamaño muestral para potencia del 90%
+
+Para diseñar un estudio futuro con mayor potencia, se calcula cuántos sujetos serían necesarios. Como el enunciado pide un test unilateral con $\alpha = 0.05$, se usa la fórmula:
+
+$$n = \frac{(z_{\alpha} + z_{\beta})^2 \sigma^2}{\delta^2}$$
+
+donde $\delta$ es la diferencia media observada, $\sigma$ la desviación típica de las diferencias, y los valores $z$ corresponden a los niveles de significación y potencia deseados.
+
+Con $\alpha = 0.05$ y potencia del 90%:
+
+```{r}
+alpha <- 0.05; potencia <- 0.90
+delta <- mean(dif); sigma <- sd(dif)
+z_alpha <- qnorm(1 - alpha); z_beta <- qnorm(potencia)
+n_req <- ceiling((z_alpha + z_beta)^2 * sigma^2 / delta^2)
+n_req
+```
+
+El tamaño muestral obtenido es 982 pares de observaciones, es decir, 982 sujetos medidos antes y después. Este cálculo debe interpretarse como una aproximación normal para planificación muestral basada en el efecto observado en el estudio piloto, por lo que conviene tomarlo con cautela, especialmente porque la estimación procede de una muestra muy pequeña de solo 8 sujetos. El valor sale tan grande porque el efecto observado en la muestra piloto es pequeño en relación con la variabilidad de las diferencias. Aun así, da una idea útil del orden de magnitud necesario para detectar un efecto similar con una potencia del 90% y un contraste unilateral al 5%.
+
+Como alternativa práctica, este cálculo también podría obtenerse con una función específica de R para estudios pareados, por ejemplo:
+
+```{r eval=FALSE}
+power.t.test(delta = abs(delta),
+             sd = sigma,
+             sig.level = 0.05,
+             power = 0.90,
+             type = "paired",
+             alternative = "one.sided")
+```
+
+Con esta vía alternativa se obtiene prácticamente el mismo orden de magnitud: alrededor de 983.2 pares, es decir, 984 si se redondea al entero superior.
+
+
+### Apartado (c): Simulación de una nueva muestra
+
+Se simula una muestra de tamaño calculado, usando los parámetros estimados, y se trata como si fuera un nuevo estudio:
+
+```{r}
+set.seed(42)
+muestra <- rnorm(n_req, mean = delta, sd = sigma)
+```
+
+Visualizamos:
+
+```{r}
+hist(muestra, breaks = 20, main = "Diferencias simuladas",
+     xlab = "mEq/8hr", col = "lightyellow")
+abline(v = 0, col = "red", lty = 2)
+abline(v = mean(muestra), col = "blue", lty = 2)
+```
+
+Aplicamos el contraste:
+
+```{r}
+t_sim <- t.test(muestra, mu = 0, alternative = "greater")
+t_sim
+```
+
+Aquí se mantiene un contraste unilateral porque lo que se quiere evaluar es, de forma específica, si la intervención consigue reducir la excreción de sodio. Además, esta elección permite mantener la coherencia con el diseño de potencia del apartado (b), que se planteó precisamente para detectar una reducción. Como la diferencia se ha definido como `inicial - mes`, una reducción del sodio tras la intervención corresponde a valores positivos de `dif`, y por eso se contrasta la hipótesis $H_1: \mu_{dif} > 0$.
+
+En esta muestra simulada, el p-valor es aproximadamente 0.0299, por lo que se rechaza $H_0$ al nivel 0.05 y se concluye que existe evidencia de una reducción de la excreción de sodio. Si se interpretara de forma estrictamente literal la expresión "existen diferencias", entonces el contraste natural sería bilateral.
+
+
+### Apartado (d): Si los datos fueran de grupos independientes
+
+Se imagina que los datos no corresponden a las mismas personas, sino a dos grupos separados: uno control (nivel basal) y otro de intervención (nivel al mes). Se perdería la estructura pareada y se tendría que usar **t de Student para muestras independientes**.
+
+Este diseño es menos potente porque no aprovecha que cada sujeto es su propio control. Además, se emplea la versión de Welch porque no obliga a suponer que ambos grupos tengan una variabilidad parecida. A continuación se presenta la diferencia:
+
+```{r}
+t_indep <- t.test(inicial, mes, var.equal = FALSE)
+t_indep
+```
+
+Comparando con el test pareado:
+
+```{r}
+t_test; t_indep
+```
+
+En este caso, el p-valor del test de Welch es 0.8402, así que tampoco se detectan diferencias significativas entre los dos grupos. Además, este enfoque suele tener menos potencia que el diseño pareado porque pierde la información del emparejamiento entre las mediciones.
+
+
+### Apartado (e): Simulación de dos muestras independientes
+
+Se simulan dos muestras independientes del tamaño calculado, con las medias y desviaciones típicas observadas:
+
+```{r}
+set.seed(123)
+mu_ini <- mean(inicial); sd_ini <- sd(inicial)
+mu_mes <- mean(mes); sd_mes <- sd(mes)
+grupo_control <- rnorm(n_req, mu_ini, sd_ini)
+grupo_interv <- rnorm(n_req, mu_mes, sd_mes)
+```
+
+Visualizamos:
+
+```{r}
+par(mfrow = c(1, 2))
+hist(grupo_control, main = "Control", xlab = "mEq/8hr", col = "lightblue",
+     xlim = range(c(grupo_control, grupo_interv)))
+hist(grupo_interv, main = "Intervención", xlab = "mEq/8hr", col = "lightgreen",
+     xlim = range(c(grupo_control, grupo_interv)))
+par(mfrow = c(1, 1))
+```
+
+Aplicamos el test:
+
+```{r}
+t_sim_indep <- t.test(grupo_control, grupo_interv, var.equal = FALSE)
+t_sim_indep
+```
+
+En esta comparación también se emplea el test de Welch porque no obliga a suponer que ambos grupos tengan una variabilidad parecida. En este apartado se usa el tamaño muestral corregido del apartado (b), es decir, $n = 982$ por grupo. Conviene señalar que ese tamaño se calculó para un diseño pareado, tal como pedía el apartado anterior, por lo que no es el cálculo más adecuado si el estudio se planteara realmente con dos muestras independientes. En esta simulación concreta, como el p-valor es 0.1051, no se rechaza $H_0$, y por tanto no hay diferencias estadísticamente significativas entre los grupos simulados.
+
+
+
